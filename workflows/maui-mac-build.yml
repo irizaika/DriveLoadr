@@ -1,0 +1,27 @@
+﻿name: Build MacCatalyst
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build for MacCatalyst
+        run: dotnet publish -f net8.0-maccatalyst -c Release -o ./output
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MacApp
+          path: ./output
