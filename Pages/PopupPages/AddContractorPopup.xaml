@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="DriveLoadr.Pages.PopupPages.AddContractorPopup"
+               Size="400,600">
+    <!-- Scrollable content -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <!-- Popup title -->
+            <Label Text="Add Contractor" 
+               FontSize="20" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" />
+
+            <!-- Name -->
+            <Label Text="Name" FontAttributes="Bold"/>
+            <Entry x:Name="NameEntry" Placeholder="Enter name" />
+
+            <!-- Name -->
+            <Label Text="ShortName" FontAttributes="Bold"/>
+            <Entry x:Name="ShortNameEntry" Placeholder="Enter short name" />
+
+            <!-- Address -->
+            <Label Text="Address" FontAttributes="Bold"/>
+            <Entry x:Name="AddressEntry" Placeholder="Enter address" />
+
+            <!-- Phone -->
+            <Label Text="Phone" FontAttributes="Bold"/>
+            <Entry x:Name="PhoneEntry" Placeholder="Enter phone number" Keyboard="Telephone" />
+
+            <!-- Email -->
+            <Label Text="Email" FontAttributes="Bold"/>
+            <Entry x:Name="EmailEntry" Placeholder="Enter email address" Keyboard="Email" />
+
+            <!-- Bank Account -->
+            <Label Text="Bank Account" FontAttributes="Bold"/>
+            <Entry x:Name="BankEntry" Placeholder="Enter bank account" />
+
+            <!-- Status -->
+            <Label Text="Status" FontAttributes="Bold"/>
+            <Picker x:Name="StatusPicker"
+                Title="Select status"
+                ItemsSource="{Binding StatusOptions}" />
+            <!--<Entry x:Name="StatusEntry" Placeholder="Enter status" />-->
+
+            <!-- Day Rate -->
+            <Label Text="Day Rate" FontAttributes="Bold"/>
+            <Entry x:Name="DayRateEntry" Placeholder="Enter day rate" Keyboard="Numeric" />
+
+            <!-- Role ID -->
+            <Label Text="Role ID" FontAttributes="Bold"/>
+            <Picker x:Name="RolePicker"
+                Title="Select role"
+                ItemsSource="{Binding RoleOptions}"
+                ItemDisplayBinding="{Binding RoleName}" />
+            <!--<Entry x:Name="RoleIdEntry" Placeholder="Enter role ID" Keyboard="Numeric" />-->
+
+            <!-- Action buttons -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center" Margin="10,20,10,0">
+                <Button Text="Save" Clicked="OnSaveClicked" />
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</toolkit:Popup>

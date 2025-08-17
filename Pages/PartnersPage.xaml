@@ -1,0 +1,50 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DriveLoadr.Pages.PartnersPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Partners List Page">
+
+    <VerticalStackLayout Padding="10" Spacing="10">
+
+        <!-- Top bar with Add button aligned to right -->
+        <Grid>
+            <Button Text="+ Add"
+                    Clicked="AddPartner_Clicked"
+                    HorizontalOptions="End"
+                    WidthRequest="120"
+                    HeightRequest="40" />
+        </Grid>
+        <CollectionView x:Name="VanView"   ItemsSource="{Binding Partners}">
+            <CollectionView.Header>
+                <Grid Padding="1" ColumnDefinitions="*,*,*,*,*,0.4*,0.4*,0.4*">
+                    <Label Grid.Column="0" Text="Company/Name" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Text="Address" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="2" Text="Email" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="3" Text="Phone1" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="4" Text="Phone2" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="5" Text="" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="6" Text="" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="7" Text="" FontAttributes="Bold" VerticalOptions="Center" />
+
+                </Grid>
+            </CollectionView.Header>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="1" ColumnDefinitions="*,*,*,*,*,0.4*,0.4*,0.4*">
+                        <Label Grid.Column="0" Text="{Binding CompanyName}" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="{Binding Address}" />
+                        <Label Grid.Column="2" Text="{Binding Email}" />
+                        <Label Grid.Column="3" Text="{Binding Phone1}" />
+                        <Label Grid.Column="4" Text="{Binding Phone2}" />
+                        <Button Grid.Column="5" Text="Edit" Clicked="EditPartner_Clicked" 
+                                Margin="3" Padding="0"  HeightRequest="20" MinimumHeightRequest="20" FontSize="12" />
+                        <Button Grid.Column="6" Text="Job types" Clicked="AddJobType_Clicked" Margin="3"  Padding="0" FontSize="12"  HeightRequest="20" MinimumHeightRequest="20" />
+                        <Button Grid.Column="7" Text="Delete" Clicked="DeletePartner_Clicked" 
+                                Margin="3" Padding="0" BackgroundColor="Salmon" TextColor="White" FontSize="12"  HeightRequest="20" MinimumHeightRequest="20"  />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

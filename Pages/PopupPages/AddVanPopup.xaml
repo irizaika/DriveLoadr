@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="DriveLoadr.Pages.PopupPages.AddVanPopup"
+               Size="400,600">
+    <!-- Scrollable content -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label Text="Add Van" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Label Text="Name" FontAttributes="Bold"/>
+            <Entry x:Name="VanNameEntry" Placeholder="Name" />
+
+            <Label Text="Details" FontAttributes="Bold"/>
+            <Entry x:Name="DetailsEntry" Placeholder="Details" />
+
+            <Label Text="Plate" FontAttributes="Bold"/>
+            <Entry x:Name="PlateEntry" Placeholder="Plate"/>
+
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Button Text="Save" Clicked="OnSaveClicked" />
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</toolkit:Popup>

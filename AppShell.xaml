@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DriveLoadr.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:pages="clr-namespace:DriveLoadr.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="DriveLoadr">
+
+    <ShellContent
+        Title="Dashboard"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate pages:DashboardPage}"
+        Route="dashboard" />
+
+    <ShellContent
+        Title="Job Planning"
+        Icon="{StaticResource IconProjects}"
+        ContentTemplate="{DataTemplate pages:JobPlanningPage}"
+        Route="jobplanning" />
+
+    <ShellContent
+        Title="Partners"
+        Icon="{StaticResource IconPartners}"
+        ContentTemplate="{DataTemplate pages:PartnersPage}"
+        Route="partners" />
+
+    <ShellContent
+        Title="Contractors"
+        Icon="{StaticResource IconPeople}"
+        ContentTemplate="{DataTemplate pages:ContractorsPage}"
+        Route="contractors" />
+
+    <ShellContent
+        Title="VanList"
+        Icon="{StaticResource IconVan}"
+        ContentTemplate="{DataTemplate pages:VanListPage}"
+        Route="vanlist" />
+    
+    <ShellContent
+        Title="JobTypes"
+        Icon="{StaticResource IconVan}"
+        ContentTemplate="{DataTemplate pages:JobTypesPage}"
+        Route="jobtypes" />
+    
+
+    <ShellContent
+        Title="Partner Report"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:PartnerReportPage}"
+        Route="report1" />
+
+    <ShellContent
+        Title="Customer Report"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:CustomerReportPage}"
+        Route="report2" />
+
+    <ShellContent
+        Title="Contractor Report"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:ContractorReportPage}"
+        Route="report3" />
+
+    <Shell.FlyoutFooter>
+        <Grid Padding="15">
+            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 
+                VerticalOptions="Center" HorizontalOptions="Center" SelectionChanged="SfSegmentedControl_SelectionChanged"
+                SegmentWidth="40" SegmentHeight="40">
+                <sf:SfSegmentedControl.ItemsSource>
+                    <x:Array Type="{x:Type sf:SfSegmentItem}">
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconLight}"/>
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconDark}"/>
+                    </x:Array>
+                </sf:SfSegmentedControl.ItemsSource>
+            </sf:SfSegmentedControl>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>

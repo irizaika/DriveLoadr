@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="DriveLoadr.Pages.PopupPages.AddJobTypePopup"
+               Size="400,600">
+    <!-- Scrollable content -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label Text="Add Job Type" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Label Text="Name" FontAttributes="Bold"/>
+            <Entry x:Name="JobTypeNameEntry" Placeholder="Name" />
+            
+            <!-- Partner -->
+            <Label Text="Partner" FontAttributes="Bold" />
+            <Picker x:Name="PartnerPicker" ItemDisplayBinding="{Binding CompanyName}" />
+
+            <Label Text="Description" FontAttributes="Bold"/>
+            <Entry x:Name="DescriptionEntry" Placeholder="Description (optional)" />
+
+            <!-- Pay -->
+            <Label Text="Number of people" FontAttributes="Bold" />
+            <Entry x:Name="NumberOfPeopleEntry" Keyboard="Numeric" />
+       
+            <Label Text="Numbaer of vans" FontAttributes="Bold" />
+            <Entry x:Name="NumberOfVansEntry" Keyboard="Numeric" />
+
+            <!-- Pay -->
+            <Label Text="Pay rate" FontAttributes="Bold" />
+            <Entry x:Name="PayRateEntry" Keyboard="Numeric" />
+
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Button Text="Save" Clicked="OnSaveClicked" />
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</toolkit:Popup>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="DriveLoadr.Pages.PopupPages.AddJobPopup"
+    Size="600,600">
+    <!-- Scrollable content -->
+    <ScrollView>
+        <VerticalStackLayout Padding="5" Spacing="5">
+            <Label Text="Add/Edit Job" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <HorizontalStackLayout Spacing="15">
+                <!-- Date -->
+                <DatePicker x:Name="DatePicker" />
+                <!-- Job Type -->
+                <Label Text="Job Type" FontAttributes="Bold" />
+                <Picker x:Name="JobTypePicker" ItemDisplayBinding="{Binding Name}" />
+            </HorizontalStackLayout>
+            
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!-- Partner -->
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label Text="Partner" FontAttributes="Bold" />
+                    <Picker x:Name="PartnerPicker" ItemDisplayBinding="{Binding CompanyName}" />
+                </VerticalStackLayout>
+
+                <!-- Count -->
+                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                    <Label Text="Count" FontAttributes="Bold" />
+                    <Entry x:Name="CountEntry" Placeholder="1 day, 0.5 day" Keyboard="Numeric" />
+                </VerticalStackLayout>
+
+                <!-- Pay -->
+                <VerticalStackLayout Grid.Column="2" Spacing="2">
+                    <Label Text="Pay" FontAttributes="Bold" />
+                    <Entry x:Name="PayReceived" Keyboard="Numeric" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Customer Name -->
+            <Label Text="CustomerName" FontAttributes="Bold"/>
+            <Entry x:Name="CustomerNameEntry" Placeholder="Optional, used when partner not selected" />
+            
+            <!-- Name -->
+            <Label Text="Details" FontAttributes="Bold"/>
+            <Entry x:Name="DetailsEntry" Placeholder="Optional, job description " />
+
+            <!-- Contractors -->
+            <Label Text="Contractors" FontAttributes="Bold"/>
+
+            <CollectionView x:Name="ContractorsCollection" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Spacing="0">
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <CollectionView x:Name="VanListCollection" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Spacing="0">
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--<Label Text="Contractors" FontAttributes="Bold"/>
+            <CollectionView x:Name="ContractorsCollection"
+                SelectionMode="Multiple"
+                HeightRequest="120">
+                <CollectionView.ItemsLayout>
+                    --><!-- 3 columns grid layout --><!--
+                    <GridItemsLayout Orientation="Vertical"
+                         Span="3" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                      
+                            <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                                <CheckBox IsChecked="{Binding IsSelected}" />
+                                <Label Text="{Binding Name}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                            </HorizontalStackLayout>
+                  
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+  
+              <!-- Buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="LightGray"/>
+                <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="LightGreen"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</toolkit:Popup>

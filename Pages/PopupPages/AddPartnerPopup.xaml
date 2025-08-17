@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="DriveLoadr.Pages.PopupPages.AddPartnerPopup"
+               Size="400,600">
+    <!-- Scrollable content -->
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <!-- Popup title -->
+            <Label Text="Add Partner" 
+               FontSize="20" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" />
+
+            <!-- Name -->
+            <Label Text="Name" FontAttributes="Bold"/>
+            <Entry x:Name="NameEntry" Placeholder="Enter name" />
+
+            <Label Text="ShortName" FontAttributes="Bold"/>
+            <Entry x:Name="ShortNameEntry" Placeholder="Enter name" />
+
+            <!-- Address -->
+            <Label Text="Address" FontAttributes="Bold"/>
+            <Entry x:Name="AddressEntry" Placeholder="Enter address" />
+
+            <!-- Phone -->
+            <Label Text="Phone1" FontAttributes="Bold"/>
+            <Entry x:Name="Phone1Entry" Placeholder="Enter phone number" Keyboard="Telephone" />
+
+            <!-- Phone -->
+            <Label Text="Phone2" FontAttributes="Bold"/>
+            <Entry x:Name="Phone2Entry" Placeholder="Enter phone number" Keyboard="Telephone" />
+
+            <!-- Email -->
+            <Label Text="Email" FontAttributes="Bold"/>
+            <Entry x:Name="EmailEntry" Placeholder="Enter email address" Keyboard="Email" />
+
+            <Label Text="Status" FontAttributes="Bold"/>
+            <Picker x:Name="StatusPicker"
+             Title="Select status"
+             ItemsSource="{Binding StatusOptions}" />
+
+            <!-- Action buttons -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center" Margin="10,20,10,0">
+                <Button Text="Save" Clicked="OnSaveClicked" />
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</toolkit:Popup>

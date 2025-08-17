@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DriveLoadr.Pages.JobTypesPage"
+             Title="JobTypesPage">
+
+    <VerticalStackLayout Padding="10" Spacing="10">
+
+        <!-- Top bar with Add button aligned to right -->
+        <Grid ColumnDefinitions=" *,*" Padding="0">
+            <Picker Grid.Column="0" x:Name="PartnerFilterPicker"
+                    SelectedIndexChanged="PartnerFilterPicker_SelectedIndexChanged"
+                    HorizontalOptions="Start" />
+            <Button  Grid.Column="1" Text="+ Add"
+                    Clicked="AddJobType_Clicked"
+                    HorizontalOptions="End"
+                    WidthRequest="120"
+                    HeightRequest="40" />
+        </Grid>
+
+        <!-- Contractor list -->
+        <CollectionView x:Name="JobTypesView" ItemsLayout="VerticalList"  ItemsSource="{Binding JobTypes}" >
+            <CollectionView.Header>
+                <Grid Padding="3" ColumnDefinitions="0.5*,0.5*,*,0.4*,0.4*,0.4*,0.3*,0.3*">
+                    <Label Grid.Column="0" Text="Name" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Text="Partner" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="2" Text="Description" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="3" Text="Number of people" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="4" Text="Number of vans" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="5" Text="Pay rate" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="6" Text="" FontAttributes="Bold" VerticalOptions="Center" />
+                    <Label Grid.Column="7" Text="" FontAttributes="Bold" VerticalOptions="Center" />
+                </Grid>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="1" ColumnDefinitions="0.5*,0.5*,*,0.4*,0.4*,0.4*,0.3*,0.3*">
+                        <Label Grid.Column="0" Margin="3" Text="{Binding Name}" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Margin="3" Text="{Binding PartnterName}" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Margin="3" Text="{Binding Description}" VerticalOptions="Center" LineBreakMode="TailTruncation" MaxLines="1"/>
+                        <Label Grid.Column="3" Margin="3" Text="{Binding NumberOfPeople}" VerticalOptions="Center" LineBreakMode="TailTruncation" MaxLines="1"/>
+                        <Label Grid.Column="4" Margin="3" Text="{Binding NumberOfVans}" VerticalOptions="Center" />
+                        <Label Grid.Column="5" Margin="3" Text="{Binding PayRate}" VerticalOptions="Center" />
+                        <Button Grid.Column="6" Text="Edit" Clicked="EditJobType_Clicked" 
+                                Margin="3" Padding="0"  HeightRequest="20" MinimumHeightRequest="20" FontSize="12" />
+                        <Button Grid.Column="7" Text="Delete" Clicked="DeleteJobType_Clicked"
+                                Margin="3" Padding="0" BackgroundColor="Salmon" TextColor="White" FontSize="12"  HeightRequest="20" MinimumHeightRequest="20"  />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
