@@ -26,7 +26,8 @@ jobs:
       - name: Zip .app bundle
         run: |
           cd bin/Release/net8.0-maccatalyst/maccatalyst-arm64
-          zip -r YourApp.zip YourApp.app
+          ls -la
+          zip -r DriveLoadr.zip DriveLoadr.app
 
       - name: Upload .app artifact
         uses: actions/upload-artifact@v4
