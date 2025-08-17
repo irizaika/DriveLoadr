@@ -25,7 +25,7 @@ jobs:
 
       - name: Zip .app bundle
         run: |
-          cd bin/Release/net9.0-maccatalyst/maccatalyst-arm64
+          cd bin/Release/net8.0-maccatalyst/maccatalyst-arm64
           zip -r YourApp.zip YourApp.app
 
       - name: Upload .app artifact
