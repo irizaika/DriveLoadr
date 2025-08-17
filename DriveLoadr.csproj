@@ -158,5 +158,9 @@
 	<ItemGroup>
 	  <Folder Include="Services\" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include=".github\workflows\maui-mac-build.yml" />
+	</ItemGroup>
 	
 </Project>
