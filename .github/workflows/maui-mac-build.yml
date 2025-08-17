@@ -20,11 +20,17 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build for MacCatalyst
-        run: dotnet publish -f net8.0-maccatalyst -c Release -o ./output
-          
-      - name: Upload artifact
+      - name: Build MacCatalyst .app
+        run: dotnet build -f net8.0-maccatalyst -c Release
+
+      - name: Zip .app bundle
+        run: |
+          cd bin/Release/net9.0-maccatalyst/maccatalyst-arm64
+          zip -r YourApp.zip YourApp.app
+
+      - name: Upload .app artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MacApp
-          path: ./output
+          name: macos-app
+          path: bin/Release/net8.0-maccatalyst/maccatalyst-arm64/YourApp.zip
+
