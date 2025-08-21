@@ -3,6 +3,7 @@
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="DriveLoadr.Pages.PopupPages.AddJobTypePopup"
+               xmlns:controls="clr-namespace:DriveLoadr.Controls"
                Size="400,600">
     <!-- Scrollable content -->
     <ScrollView>
@@ -31,8 +32,8 @@
             <Entry x:Name="PayRateEntry" Keyboard="Numeric" />
 
             <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-                <Button Text="Save" Clicked="OnSaveClicked" />
-                <Button Text="Cancel" Clicked="OnCancelClicked" />
+                <controls:SolidColorButton Text="Save" Clicked="OnSaveClicked" AccentColor="#4CAF50" />
+                <controls:SolidColorButton Text="Cancel" Clicked="OnCancelClicked" AccentColor="Salmon" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

@@ -58,7 +58,6 @@ public class ContractorsPageModel : ObservableObject // from CommunityToolkit.Mv
         );
     }
 
-    // Command methods can be wired from XAML or code-behind
     public async Task AddContractorAsync(ContentPage page)
     {
         var popup = _serviceProvider.GetRequiredService<AddContractorPopup>();
@@ -134,11 +133,10 @@ public class ContractorsPageModel : ObservableObject // from CommunityToolkit.Mv
         }
     }
     
-    // Command methods can be wired from XAML or code-behind
     public async Task AddJobTypeAsync(ContentPage page)
     {
         var popup = _serviceProvider.GetRequiredService<AddJobTypePopup>();
-        popup.Initialize();
+        await popup.Initialize();
 
         var result = await page.ShowPopupAsync(popup);
 

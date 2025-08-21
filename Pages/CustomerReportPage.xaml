@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pageModels="clr-namespace:DriveLoadr.PageModels"
              x:Class="DriveLoadr.Pages.CustomerReportPage"
+             xmlns:controls="clr-namespace:DriveLoadr.Controls"
              Title="Reports">
 
     <ScrollView>
@@ -12,15 +13,10 @@
                 <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
 
                     <DatePicker Date="{Binding StartDate}" MaximumDate="{Binding EndDate}" />
-
                     <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding StartDate}" />
 
-                    <Button Text="Generate Report" Command="{Binding GenerateReportCommand}" 
-                            BackgroundColor="#e0e0e0" Padding="6"/>
-
-                    <Button Text="Export to Excel" 
-                            Command="{Binding ExportReportCommand}" 
-                            BackgroundColor="LightGreen" />
+                    <controls:SolidColorButton Text="Generate Report" Command="{Binding GenerateReportCommand}" Padding="6" WidthRequest="160" AccentColor="LightGrey"/>
+                    <controls:SolidColorButton Text="Export to Excel" Command="{Binding ExportReportCommand}" WidthRequest="160"  AccentColor="#4CAF50" />
                 </HorizontalStackLayout>
             </Frame>
 

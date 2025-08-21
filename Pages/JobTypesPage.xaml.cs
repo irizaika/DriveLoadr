@@ -1,5 +1,4 @@
 using DriveLoadr.Models;
-using DriveLoadr.PageModels;
 
 namespace DriveLoadr.Pages;
 
@@ -12,7 +11,7 @@ public partial class JobTypesPage : ContentPage
 
     public JobTypesPage(JobTypesPageModel model)
 	{
-    InitializeComponent();
+        InitializeComponent();
         ViewModel = model;
         BindingContext = model;
 	}
@@ -27,7 +26,7 @@ public partial class JobTypesPage : ContentPage
             await vm.LoadJobTypes();
             PartnerFilterPicker.ItemsSource = vm.Partners;
             PartnerFilterPicker.ItemDisplayBinding = new Binding("CompanyName");
-            PartnerFilterPicker.SelectedIndex = 0; // default to "All"
+            PartnerFilterPicker.SelectedIndex = Constants.All; // default to "All"
             // set selected filter if passed
             if (PartnerId > 0)
             {
@@ -45,7 +44,12 @@ public partial class JobTypesPage : ContentPage
     }
     private async void AddJobType_Clicked(object sender, EventArgs e)
     {
-        await ViewModel.AddJobTypeAsync(this);
+        int? partnerId = null;
+        if(PartnerFilterPicker.SelectedItem is Partner partner)
+        {
+            partnerId = partner.Id;
+        }
+        await ViewModel.AddJobTypeAsync(this, partnerId);
     }
 
     private async void EditJobType_Clicked(object sender, EventArgs e)
@@ -69,7 +73,7 @@ public partial class JobTypesPage : ContentPage
         if (BindingContext is not JobTypesPageModel vm) return;
         if (PartnerFilterPicker.SelectedItem is not Partner selected) return;
 
-        if (selected.Id == 0)
+        if (selected.Id == Constants.All)
         {
             // show all
             JobTypesView.ItemsSource = vm.JobTypes;

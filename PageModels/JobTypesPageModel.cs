@@ -8,10 +8,10 @@ namespace DriveLoadr.PageModels;
 
 public class JobTypesDisplay : JobType
 {
-    public string PartnterName { get; set; } = "General"; // if parrners id is 0;
+    public string PartnterName { get; set; } = "Custom"; // if partners id is 0;
 }
 
-public class JobTypesPageModel : ObservableObject // from CommunityToolkit.Mvvm.ComponentModel
+public class JobTypesPageModel : ObservableObject
 {
     private readonly JobTypeRepository _jobTypeRepository;
     private readonly PartnerRepository _partnerRepository;
@@ -37,7 +37,7 @@ public class JobTypesPageModel : ObservableObject // from CommunityToolkit.Mvvm.
         Partners = new ObservableCollection<Partner>();
     }
 
-    // Load contractors from database
+    // Load job types from database
     public async Task LoadJobTypes()
     {
         var contractors = await _jobTypeRepository.GetJobTypesAsync();
@@ -45,7 +45,8 @@ public class JobTypesPageModel : ObservableObject // from CommunityToolkit.Mvvm.
 
         // fill partner list for the filter (include "All")
         Partners.Clear();
-        Partners.Add(new Partner { Id = 0, CompanyName = "All" });
+        Partners.Add(new Partner { Id = Constants.All, CompanyName = "All" });
+        Partners.Add(new Partner { Id = 0, CompanyName = "Custom" });
         foreach (var p in partners)
             Partners.Add(p);
 
@@ -59,18 +60,17 @@ public class JobTypesPageModel : ObservableObject // from CommunityToolkit.Mvvm.
                 NumberOfPeople = c.NumberOfPeople,
                 NumberOfVans = c.NumberOfVans,
                 PayRate = c.PayRate,
-                PartnterName = partners.FirstOrDefault(r => r.Id == c.PartnerID)?.CompanyName ?? "General"
+                PartnterName = partners.FirstOrDefault(r => r.Id == c.PartnerID)?.CompanyName ?? "Custom"
             })
         );
     }
 
     // Command methods can be wired from XAML or code-behind
-    public async Task AddJobTypeAsync(ContentPage page)
+    public async Task AddJobTypeAsync(ContentPage page, int? selectedPartnerId = null )
     {
-
         //await Shell.Current.GoToAsync(nameof(JobTypesPage));
         var popup = _serviceProvider.GetRequiredService<AddJobTypePopup>();
-        popup.Initialize();
+        await popup.Initialize(null, selectedPartnerId);
 
         var result = await page.ShowPopupAsync(popup);
 
@@ -95,7 +95,7 @@ public class JobTypesPageModel : ObservableObject // from CommunityToolkit.Mvvm.
         };
 
         var popup = _serviceProvider.GetRequiredService<AddJobTypePopup>();
-        popup.Initialize(dbJobType);
+        await popup.Initialize(dbJobType);
 
         var result = await page.ShowPopupAsync(popup);
 
@@ -128,9 +128,9 @@ public class JobTypesPageModel : ObservableObject // from CommunityToolkit.Mvvm.
         {
             var result = await _jobTypeRepository.DeleteJobTypeAsync(dbJobType);
             if (result > 0)
-                await page.DisplayAlert("Success", "Contractor deleted successfully", "OK");
+                await page.DisplayAlert("Success", "Job type deleted successfully", "OK");
             else
-                await page.DisplayAlert("Error", "Failed to delete contractor", "OK");
+                await page.DisplayAlert("Error", "Failed to delete job type", "OK");
 
             await LoadJobTypes();
         }

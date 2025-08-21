@@ -2,31 +2,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pageModels="clr-namespace:DriveLoadr.PageModels"
              x:Class="DriveLoadr.Pages.ContractorReportPage"
+             xmlns:controls="clr-namespace:DriveLoadr.Controls"
              Title="Reports">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="10">
+    <VerticalStackLayout Padding="10" Spacing="10">
 
-            <!-- Date range selection -->
-            <Frame BackgroundColor="#f0f0f0" Padding="10" CornerRadius="6" BorderColor="LightGray">
-                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+        <!-- Date range selection -->
+        <Frame BackgroundColor="#f0f0f0" Padding="10" CornerRadius="6" BorderColor="LightGray">
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
 
-                    <DatePicker Date="{Binding StartDate}" MaximumDate="{Binding EndDate}" />
+                <DatePicker Date="{Binding StartDate}" MaximumDate="{Binding EndDate}" />
+                <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding StartDate}" />
 
-                    <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding StartDate}" />
+                <controls:SolidColorButton Text="Generate Report" Command="{Binding GenerateReportCommand}" Padding="6" WidthRequest="160" AccentColor="LightGrey"/>
+                <controls:SolidColorButton Text="Export to Excel" Command="{Binding ExportReportCommand}" WidthRequest="160"  AccentColor="#4CAF50" />
+            </HorizontalStackLayout>
+        </Frame>
 
-                    <Button Text="Generate Report" Command="{Binding GenerateReportCommand}" 
-                            BackgroundColor="#e0e0e0" Padding="6"/>
+        <!-- Current range label -->
+        <Label Text="{Binding DateRangeText}" FontAttributes="Bold" HorizontalOptions="Center"/>
 
-                    <Button Text="Export to Excel" 
-                            Command="{Binding ExportReportCommand}" 
-                            BackgroundColor="LightGreen" />
-                </HorizontalStackLayout>
-            </Frame>
-
-            <!-- Optional: Current range label -->
-            <Label Text="{Binding DateRangeText}" FontAttributes="Bold" HorizontalOptions="Center"/>
-
+        <ScrollView>
             <!-- Report results -->
             <CollectionView ItemsSource="{Binding ReportItems}">
                 <CollectionView.ItemTemplate>
@@ -55,8 +51,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+        </ScrollView>
 
-
-        </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
 </ContentPage>

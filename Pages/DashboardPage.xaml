@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DriveLoadr.Pages.DashboardPage"
+             xmlns:controls="clr-namespace:DriveLoadr.Controls"
              Title="{Binding Today}">
 
     <ScrollView>
@@ -23,10 +24,10 @@
                     <Label Text="View Data" FontAttributes="Bold" FontSize="20" TextColor="White"/>
                     <Label Text="Browse your database records" TextColor="White" FontSize="14"/>
                     <HorizontalStackLayout>
-                        <Button Text="Contractors" Command="{Binding ViewContractorsDataCommand}" BackgroundColor="White" TextColor="#2196F3" Margin="10,20,10,0"/>
-                        <Button Text="Vans" Command="{Binding ViewVansDataCommand}" BackgroundColor="White" TextColor="#2196F3" Margin="10,20,10,0"/>
-                        <Button Text="Partners" Command="{Binding ViewPartnersDataCommand}" BackgroundColor="White" TextColor="#2196F3" Margin="10,20,10,0"/>
-                        <Button Text="Job Types" Command="{Binding ViewJobTypesDataCommand}" BackgroundColor="White" TextColor="#2196F3" Margin="10,20,10,0"/>
+                        <controls:DashboardButton Text="Contractors" Command="{Binding ViewContractorsDataCommand}" TextColor="#2196F3" AccentColor="#2196F3"/>
+                        <controls:DashboardButton Text="Vans" Command="{Binding ViewVansDataCommand}" TextColor="#2196F3" AccentColor="#2196F3"/>
+                        <controls:DashboardButton Text="Partners" Command="{Binding ViewPartnersDataCommand}" TextColor="#2196F3" AccentColor="#2196F3"/>
+                        <controls:DashboardButton Text="Job Types" Command="{Binding ViewJobTypesDataCommand}" TextColor="#2196F3" AccentColor="#2196F3"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
@@ -38,9 +39,9 @@
                     <Label Text="Reports" FontAttributes="Bold" FontSize="20" TextColor="White"/>
                     <Label Text="Generate reports from your data. More reports coming soon" TextColor="White" FontSize="14"/>
                     <HorizontalStackLayout>
-                        <Button Text="Partners" Command="{Binding GeneratePartnerReportsCommand}" BackgroundColor="White" TextColor="#4CAF50" Margin="10,20,10,0"/>
-                        <Button Text="Customers" Command="{Binding GenerateCustomerReportsCommand}" BackgroundColor="White" TextColor="#4CAF50" Margin="10,20,10,0"/>
-                        <Button Text="Contractors" Command="{Binding GenerateContractorReportsCommand}" BackgroundColor="White" TextColor="#4CAF50" Margin="10,20,10,0"/>
+                        <controls:DashboardButton Text="Partners" Command="{Binding GeneratePartnerReportsCommand}" TextColor="#4CAF50" AccentColor="#4CAF50"/>
+                        <controls:DashboardButton Text="Customers" Command="{Binding GenerateCustomerReportsCommand}" TextColor="#4CAF50" AccentColor="#4CAF50"/>
+                        <controls:DashboardButton Text="Contractors" Command="{Binding GenerateContractorReportsCommand}" TextColor="#4CAF50" AccentColor="#4CAF50"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
@@ -51,7 +52,7 @@
                 <VerticalStackLayout>
                     <Label Text="Invoices" FontAttributes="Bold" FontSize="20" TextColor="White"/>
                     <Label Text="Create new invoices. Coming soon..." TextColor="White" FontSize="14"/>
-                    <Button Text="Go" Command="{Binding CreateInvoiceCommand}" BackgroundColor="White" TextColor="#FF9800" Margin="10,20,10,0"/>
+                    <Button Text="Go" Command="{Binding CreateInvoiceCommand}" BackgroundColor="White" TextColor="#FF9800" Margin="0,20,10,0"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -61,10 +62,9 @@
                 <VerticalStackLayout>
                     <Label Text="Job planning" FontAttributes="Bold" FontSize="20" TextColor="White"/>
                     <Label Text="View or add new jobs" TextColor="White" FontSize="14"/>
-                    <Button Text="Go to job planner" Command="{Binding GoToSheduleCommand}" BackgroundColor="White" TextColor="#9C27B0" Margin="10,20,10,0"/>
+                    <controls:DashboardButton Text="Go to job planner" Command="{Binding GoToSheduleCommand}" TextColor="#9C27B0" AccentColor="#9C27B0" />
                 </VerticalStackLayout>
             </Frame>
-
 
             <!-- Placeholder for future features -->
             <Frame Grid.Row="2" Grid.Column="0" CornerRadius="15" BackgroundColor="#ff3399"
@@ -72,11 +72,9 @@
                 <VerticalStackLayout>
                     <Label Text="Analytics" FontAttributes="Bold" FontSize="20" TextColor="White"/>
                     <Label Text="Coming soon..." TextColor="White" FontSize="14"/>
-                    <Button Text="Go" BackgroundColor="White" TextColor="#ff3399" Margin="10,20,10,0"/>
+                    <Button Text="Go" BackgroundColor="White" TextColor="#ff3399" Margin="0,20,10,0"/>
                 </VerticalStackLayout>
             </Frame>
-
-
 
         </Grid>
     </ScrollView>

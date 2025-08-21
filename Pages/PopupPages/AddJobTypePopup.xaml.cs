@@ -17,16 +17,16 @@ public partial class AddJobTypePopup : Popup
         _partnerRepository = partnerRepository;
     }
 
-    public async Task Initialize(JobType jobType = null)
+    public async Task Initialize(JobType jobType = null, int? selectedPartner = null)
     {
         _jobType = jobType ?? new JobType();
         _isEditMode = jobType != null;
 
         // Partners
         var partners = await _partnerRepository.GetPartnersListAsync();
-        partners.Insert(0, new Partner { Id = 0, CompanyName = "General" });
+        partners.Insert(0, new Partner { Id = 0, CompanyName = "Custom" });
         PartnerPicker.ItemsSource = partners;
-        PartnerPicker.SelectedIndex = 0; // default to "General"
+        PartnerPicker.SelectedIndex = selectedPartner == null || selectedPartner == Constants.All ? 0 : selectedPartner.Value; // default to "General" if not passed from Patner page -> Job types page
 
         BindingContext = _jobType;
 

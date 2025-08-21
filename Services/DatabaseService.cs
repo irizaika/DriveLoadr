@@ -1,7 +1,7 @@
 ﻿using SQLite;
 using DriveLoadr.Models;
 
-namespace DriveLoadr.Data
+namespace DriveLoadr.Services
 {
     public class DatabaseService
     {
@@ -29,12 +29,12 @@ namespace DriveLoadr.Data
             }
 
             // Seed roles and job types if empty
-            if ((await _database.Table<Role>().CountAsync()) == 0)
+            if (await _database.Table<Role>().CountAsync() == 0)
             {
                 await _database.InsertAsync(new Role { RoleName = "Driver" });
                 await _database.InsertAsync(new Role { RoleName = "Porter" });
             }
-            if ((await _database.Table<JobType>().CountAsync()) == 0)
+            if (await _database.Table<JobType>().CountAsync() == 0)
             {
                 await _database.InsertAsync(new JobType
                 {

@@ -3,6 +3,7 @@
              xmlns:pageModels="clr-namespace:DriveLoadr.PageModels"
              x:Class="DriveLoadr.Pages.JobPlanningPage"
              xmlns:converters="clr-namespace:DriveLoadr.Utilities"
+             xmlns:controls="clr-namespace:DriveLoadr.Controls"
              Title="Job Planning">
 
     <ContentPage.Resources>
@@ -11,107 +12,84 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="5" Padding="5">
+    <Grid RowDefinitions="Auto,Auto,*" VerticalOptions="Center" >
+        <!-- Header with date range -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" Padding="5">
+            <DatePicker Date="{Binding StartDate}" MaximumDate="{Binding EndDate}" />
+            <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding StartDate}" />
+            <controls:SolidColorButton Text="Refresh" Command="{Binding RefreshJobsCommand}" AccentColor="LightGray"  />
+        </HorizontalStackLayout>
 
-            <!-- Header with date range -->
+        <Grid Grid.Row="1" ColumnDefinitions="0.1*,*" Padding="5" >
+            <Grid Grid.Column="0" ColumnDefinitions="*,0.5*" ColumnSpacing="5" Padding="5" >
+                <Label Text="" Grid.Column="0" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="" Grid.Column="1" FontSize="10" FontAttributes="Bold"/>
+            </Grid>
+            <Grid Grid.Column="1" ColumnDefinitions="0.35*,0.5*,0.12*,0.4*,0.5*,0.2*,*,0.2*"  ColumnSpacing="5" Padding="5">
+                <Label Text="Partner" Grid.Column="0" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="Job type" Grid.Column="1" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="Count" Grid.Column="2" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="Van" Grid.Column="3" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="Contractors" Grid.Column="4" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="Pay" Grid.Column="5" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="Details" Grid.Column="6" FontSize="10" FontAttributes="Bold"/>
+                <Label Text="Actions" Grid.Column="7" FontSize="10" FontAttributes="Bold"/>
+            </Grid>
+        </Grid>
 
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" VerticalOptions="Center">
-                <DatePicker Date="{Binding StartDate}" MaximumDate="{Binding EndDate}" />
-                <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding StartDate}" />
-                <Button Text="Refresh" 
-                    Command="{Binding RefreshJobsCommand}" 
-                    BackgroundColor="#e0e0e0" 
-                    Padding="3"/>
-            </HorizontalStackLayout>
-  
-            <!-- Days collection -->
-            <CollectionView ItemsSource="{Binding MonthDays}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="8" Margin="4" CornerRadius="8" BorderColor="LightGray" BackgroundColor="White">
-                            <Grid ColumnDefinitions="100,  80, *">
+        <!-- Days + Jobs -->
+        <CollectionView Grid.Row="2" Margin="0" ItemsSource="{Binding MonthDays}"  >
+            <CollectionView.ItemTemplate ColumnSpacing="0" Padding ="0">
+                <DataTemplate>
+                    <Frame Padding="0" Margin="0" CornerRadius="8" BorderColor="LightGray" BackgroundColor="White">
+                        <Grid  ColumnDefinitions="0.1*,*" Padding="5" ColumnSpacing="5">
+                            <Grid Grid.Column="0" Padding="0" Margin="0" >
+                                <Grid ColumnDefinitions="*,0.5*" Padding="0" Margin="0" >
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Date, StringFormat='{0:ddd dd MMM}'}" FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           TextColor="{Binding IsWeekend, Converter={StaticResource WeekendColorConverter}}" />
 
-                                <!-- Day header -->
-                                <Label Grid.Column="0" Text="{Binding Date, StringFormat='{0:ddd dd MMM}'}"
-                                   FontAttributes="Bold"
-                                   TextColor="{Binding IsWeekend, Converter={StaticResource WeekendColorConverter}}" />
-
-                                <!-- Add job button -->
-                                <Button Grid.Column="1" Text="+ Add Job" 
-                                    FontSize="12" HeightRequest="20" MinimumHeightRequest="20"
-                                    Padding="4"
-                                    BackgroundColor="#e0e0e0"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type pageModels:JobPlanningPageModel}}, Path=AddJobCommand}"
-                                    CommandParameter="{Binding Date}" />
-                                
-
-                                <!-- Jobs list -->
-                                <CollectionView Grid.Column="2" ItemsSource="{Binding Jobs}" Margin="0">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <HorizontalStackLayout Spacing="5" VerticalOptions="Center" >
-
-                                                <!-- Partner -->
-                                                <Label Text="{Binding PartnerName}" FontAttributes="Bold"  FontSize="13" TextColor="DarkBlue"/>
-
-                                                <!-- Job Type + Count -->
-                                                <Label Text="{Binding JobTypeName}" TextColor="Grey"  FontSize="13"/>
-                                                    <Label Text="( x" FontSize="13"/>
-                                                    <Label Text="{Binding Count}" FontSize="13"/>
-                                                    <Label Text=")" FontSize="13"/>
-
-                                                    <!-- Separator -->
-                                                    <Label Text="|" FontSize="13" TextColor="Gray"/>
-
-                                                    <!-- Van -->
-                                                    <Label Text="{Binding VanDisplay}" FontSize="13"/>
-
-                                                    <Label Text="|" FontSize="13" TextColor="Gray"/>
-
-                                                    <!-- Contractors -->
-                                                    <Label Text="{Binding ContractorsDisplay}" FontSize="13" TextColor="DarkGreen"/>
-
-                                                    <Label Text="|" FontSize="13" TextColor="Gray"/>
-
-                                                    <!-- Pay -->
-                                                    <Label Text="Pay:" FontSize="13" FontAttributes="Bold"/>
-                                                    <Label Text="{Binding OriginalJob.PayReceived}" FontSize="13"/>
-
-                                                    <Label Text="|" FontSize="13" TextColor="Gray"/>
-
-                                                    <!-- Details -->
-                                                <Label Text="{Binding OriginalJob.Details}" FontAttributes="Italic" FontSize="13" LineBreakMode="TailTruncation"/>
-
-                                             
-
-                                                <!-- Edit button -->
-                                                <Button 
-                                                    Text="✎" 
-                                                    FontSize="13" HeightRequest="20" MinimumHeightRequest="20" Background="Transparent" TextColor="Black"
-                                                    Padding="3"
-                                                    WidthRequest="20" MinimumWidthRequest="20" 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type pageModels:JobPlanningPageModel}}, Path=EditJobCommand}"
-                                                    CommandParameter="{Binding OriginalJob}" />
-
-                                                <!-- Edit button -->
-                                                <Button  Text="⨯"
-                                                        
-                                                    FontSize="16" HeightRequest="20" MinimumHeightRequest="20" Background="Transparent" TextColor="Red"
-                                                    Padding="3"  WidthRequest="20" MinimumWidthRequest="20" 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type pageModels:JobPlanningPageModel}}, Path=DeleteJobCommand}"
-                                                    CommandParameter="{Binding OriginalJob}" />
-
-                                            </HorizontalStackLayout>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-
+                                    <controls:SmallAddButton Text="+ Job" Grid.Column="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type pageModels:JobPlanningPageModel}}, Path=AddJobCommand}"
+                                            CommandParameter="{Binding Date}" />    
+                                </Grid>
                             </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
+
+                        <!-- Jobs -->
+                            <CollectionView Grid.Column="1" ItemsSource="{Binding Jobs}" Margin="0" >
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="0.35*,0.5*,0.12*,0.4*,0.5*,0.2*,*,0.2*" Padding="0"  ColumnSpacing="0" >
+                                            <Label Text="{Binding PartnerName}" Grid.Column="0" FontAttributes="Bold" FontSize="13" TextColor="DarkBlue"/>
+                                            <Label Text="{Binding JobTypeName}" Grid.Column="1" TextColor="Gray" FontSize="13"/>
+                                            <Label Text="{Binding Count}" Grid.Column="2" FontSize="13"/>
+                                            <Label Text="{Binding VanDisplay}" Grid.Column="3" FontSize="13"/>
+                                            <Label Text="{Binding ContractorsDisplay}" Grid.Column="4" FontSize="13" TextColor="DarkGreen"/>
+                                            <Label Text="{Binding OriginalJob.PayReceived}" Grid.Column="5" FontSize="13"/>
+                                            <Label Text="{Binding OriginalJob.Details}" Grid.Column="6" FontAttributes="Italic"
+                                               FontSize="12" LineBreakMode="TailTruncation"/>
+
+                                            <HorizontalStackLayout Grid.Column="7">
+                                                <controls:EditButton Text="✎" 
+                                                CommandParameter="{Binding OriginalJob}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type pageModels:JobPlanningPageModel}}, Path=EditJobCommand}"/>
+
+                                                <controls:DeleteButton Text="⨯"
+                                                CommandParameter="{Binding OriginalJob}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type pageModels:JobPlanningPageModel}}, Path=DeleteJobCommand}"/>
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+    </Grid>
+
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
 </ContentPage>
